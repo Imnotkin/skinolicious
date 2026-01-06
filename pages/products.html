@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <title>SkinOLicious - Our Products</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https:cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https:cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https:cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-        
-          
-           
         * {
             margin: 0;
             padding: 0;
@@ -25,9 +22,6 @@
             overflow-x: hidden;
         }
 
-        
-           
-           
         .header {
             display: flex;
             justify-content: space-between;
@@ -110,9 +104,6 @@
             width: 100%;
         }
 
-        
-          
-           
         .products-hero {
             padding: 60px 8% 40px;
             text-align: center;
@@ -148,9 +139,6 @@
             line-height: 1.6;
         }
 
-        
-         
-           
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -234,9 +222,6 @@
             transform: scale(1.05);
         }
 
-        
-        
-           
         .cart-button {
             position: fixed;
             bottom: 30px;
@@ -276,9 +261,6 @@
             margin-left: 5px;
         }
 
-        
-         
-           
         .cart-modal {
             position: fixed;
             top: 0;
@@ -503,9 +485,6 @@
             color: #ddd;
         }
 
-        
-      
-           
         @media (max-width: 1200px) {
             .products-hero h1 {
                 font-size: 60px;
@@ -624,17 +603,15 @@
     </section>
 
     <section class="product-grid" id="productGrid">
-        <!-- Product cards will be populated by JavaScript -->
+        
     </section>
 </main>
 
-<!-- Shopping Cart Floating Button -->
 <button class="cart-button" id="cartButton">
     <i class="fas fa-shopping-cart"></i> View Cart
     <span class="cart-count" id="cartCount">0</span>
 </button>
 
-<!-- Cart Modal -->
 <div class="cart-modal" id="cartModal">
     <div class="cart-content">
         <div class="cart-header">
@@ -645,7 +622,6 @@
         </div>
         
         <div class="cart-items" id="cartItems">
-            <!-- Cart items will be populated by JavaScript -->
             <div class="empty-cart" id="emptyCart">
                 <i class="fas fa-shopping-cart"></i>
                 <h3>Your cart is empty</h3>
@@ -680,20 +656,19 @@
 </div>
 
 <script>
-     Product data with prices in pesos
     const products = [
         {
             id: 1,
             name: "Crispy Chicken Chips (Original)",
             category: "crispy",
-            price: 59,  Original flavor is 59 pesos
+            price: 59,
             image: "../images/orig.png"
         },
         {
             id: 2,
             name: "Spicy Chicken Strips",
             category: "spicy",
-            price: 63,  Other flavors are 63 pesos
+            price: 63,
             image: "../images/spicy.png"
         },
         {
@@ -726,15 +701,12 @@
         },
     ];
 
-     Shopping cart array
     let cart = JSON.parse(localStorage.getItem('skinolicious_cart')) || [];
 
-     Function to format price
     function formatPrice(price) {
         return `₱${price.toFixed(2)}`;
     }
 
-     Function to update cart display
     function updateCartDisplay() {
         const cartCount = document.getElementById('cartCount');
         const cartItems = document.getElementById('cartItems');
@@ -745,7 +717,6 @@
         const cartItemsCount = document.getElementById('cartItemsCount');
         const cartTotal = document.getElementById('cartTotal');
         
-         Calculate total items and price
         let totalItems = 0;
         let subtotal = 0;
         
@@ -754,13 +725,10 @@
             subtotal += item.price * item.quantity;
         });
         
-         Update cart count
         cartCount.textContent = totalItems;
         
-         Save cart to localStorage
         localStorage.setItem('skinolicious_cart', JSON.stringify(cart));
         
-         Update cart modal
         if (cart.length === 0) {
             emptyCart.style.display = 'block';
             cartSummary.style.display = 'none';
@@ -770,7 +738,6 @@
             cartSummary.style.display = 'block';
             cartActions.style.display = 'flex';
             
-             Update cart items list
             cartItems.innerHTML = '';
             cart.forEach((item, index) => {
                 const cartItem = document.createElement('div');
@@ -793,7 +760,6 @@
                 cartItems.appendChild(cartItem);
             });
             
-             Add event listeners for quantity buttons
             document.querySelectorAll('.quantity-btn.decrease').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const index = parseInt(this.getAttribute('data-index'));
@@ -815,7 +781,6 @@
                 });
             });
             
-             Add event listeners for remove buttons
             document.querySelectorAll('.remove-item').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const index = parseInt(this.getAttribute('data-index'));
@@ -824,25 +789,20 @@
                 });
             });
             
-             Update summary
             cartSubtotal.textContent = formatPrice(subtotal);
             cartItemsCount.textContent = totalItems;
             cartTotal.textContent = formatPrice(subtotal);
         }
     }
 
-     Function to add item to cart
     function addToCart(productId, quantity = 1) {
         const product = products.find(p => p.id === productId);
         
-         Check if product already in cart
         const existingIndex = cart.findIndex(item => item.id === productId);
         
         if (existingIndex >= 0) {
-             Update quantity if already in cart
             cart[existingIndex].quantity += quantity;
         } else {
-             Add new item to cart
             cart.push({
                 id: product.id,
                 name: product.name,
@@ -852,10 +812,8 @@
             });
         }
         
-         Update cart display
         updateCartDisplay();
         
-         Simple button animation
         const button = event.currentTarget;
         button.style.transform = 'scale(0.95)';
         setTimeout(() => {
@@ -863,7 +821,6 @@
         }, 200);
     }
 
-     Function to clear cart
     function clearCart() {
         if (cart.length > 0) {
             if (confirm('Are you sure you want to clear your cart?')) {
@@ -874,14 +831,12 @@
         }
     }
 
-     Function to generate PDF receipt
     function generatePDFReceipt() {
         if (cart.length === 0) {
             alert('Your cart is empty!');
             return;
         }
 
-         Calculate totals
         let subtotal = 0;
         let totalItems = 0;
         
@@ -890,7 +845,6 @@
             totalItems += item.quantity;
         });
 
-         Create receipt HTML
         const receiptHTML = `
             <div id="receipt" style="padding: 20px; font-family: Arial, sans-serif; max-width: 400px;">
                 <div style="text-align: center; margin-bottom: 20px;">
@@ -945,14 +899,12 @@
             </div>
         `;
 
-         Create temporary element for receipt
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = receiptHTML;
         tempDiv.style.position = 'absolute';
         tempDiv.style.left = '-9999px';
         document.body.appendChild(tempDiv);
 
-         Generate PDF
         html2canvas(tempDiv.querySelector('#receipt')).then(canvas => {
             const imgData = canvas.toDataURL('image/png');
             const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
@@ -974,15 +926,12 @@
 
             pdf.save(`SkinOLicious_Receipt_${Date.now()}.pdf`);
             
-             Clean up
             document.body.removeChild(tempDiv);
             
-             Show success message
             alert('Receipt generated successfully! Check your downloads folder.');
         });
     }
 
-     Function to render products
     function renderProducts() {
         const productGrid = document.getElementById('productGrid');
         productGrid.innerHTML = '';
@@ -1005,7 +954,6 @@
             productGrid.appendChild(productCard);
         });
         
-         Add event listeners to "Add to Cart" buttons
         document.querySelectorAll('.add-to-cart').forEach(button => {
             button.addEventListener('click', function(event) {
                 const productId = parseInt(this.getAttribute('data-id'));
@@ -1014,35 +962,27 @@
         });
     }
 
-     Event Listeners
     document.addEventListener('DOMContentLoaded', () => {
-         Render products
         renderProducts();
         
-         Cart button click
         document.getElementById('cartButton').addEventListener('click', () => {
             document.getElementById('cartModal').style.display = 'flex';
         });
         
-         Close cart modal
         document.getElementById('closeCart').addEventListener('click', () => {
             document.getElementById('cartModal').style.display = 'none';
         });
         
-         Close cart modal when clicking outside
         document.getElementById('cartModal').addEventListener('click', (e) => {
             if (e.target.id === 'cartModal') {
                 document.getElementById('cartModal').style.display = 'none';
             }
         });
         
-         Clear cart button
         document.getElementById('clearCart').addEventListener('click', clearCart);
         
-         Generate PDF button
         document.getElementById('generatePdf').addEventListener('click', generatePDFReceipt);
         
-         Add hover effect to logo
         const logo = document.querySelector('.logo');
         logo.addEventListener('mouseenter', function() {
             this.style.transform = 'scale(1.05)';
@@ -1053,12 +993,9 @@
             this.style.transform = 'scale(1)';
         });
         
-         Initialize cart display
         updateCartDisplay();
     });
 </script>
 
 </body>
-
 </html>
-

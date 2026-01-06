@@ -8,9 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-        /* =========================================
-           1. RESET & BASICS
-           ========================================= */
+
         * {
             margin: 0;
             padding: 0;
@@ -110,9 +108,7 @@
             width: 100%;
         }
 
-        /* =========================================
-           3. PRODUCTS HERO SECTION
-           ========================================= */
+    
         .products-hero {
             padding: 60px 8% 40px;
             text-align: center;
@@ -148,9 +144,7 @@
             line-height: 1.6;
         }
 
-        /* =========================================
-           4. PRODUCT GRID
-           ========================================= */
+
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -234,9 +228,7 @@
             transform: scale(1.05);
         }
 
-        /* =========================================
-           5. SHOPPING CART FLOATING BUTTON
-           ========================================= */
+
         .cart-button {
             position: fixed;
             bottom: 30px;
@@ -276,9 +268,7 @@
             margin-left: 5px;
         }
 
-        /* =========================================
-           6. CART MODAL
-           ========================================= */
+     
         .cart-modal {
             position: fixed;
             top: 0;
@@ -503,9 +493,7 @@
             color: #ddd;
         }
 
-        /* =========================================
-           7. RESPONSIVE DESIGN
-           ========================================= */
+
         @media (max-width: 1200px) {
             .products-hero h1 {
                 font-size: 60px;
@@ -610,7 +598,7 @@
     </a>
     
     <nav class="nav">
-        <a href="../home.html">Home</a>
+        <a href="../index.html">Home</a>
         <a href="products.html" class="active">Products</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
@@ -645,7 +633,7 @@
         </div>
         
         <div class="cart-items" id="cartItems">
-            <!-- Cart items will be populated by JavaScript -->
+            
             <div class="empty-cart" id="emptyCart">
                 <i class="fas fa-shopping-cart"></i>
                 <h3>Your cart is empty</h3>
@@ -680,20 +668,20 @@
 </div>
 
 <script>
-    // Product data with prices in pesos
+   
     const products = [
         {
             id: 1,
             name: "Crispy Chicken Chips (Original)",
             category: "crispy",
-            price: 59, // Original flavor is 59 pesos
+            price: 59, 
             image: "../images/orig.png"
         },
         {
             id: 2,
             name: "Spicy Chicken Strips",
             category: "spicy",
-            price: 63, // Other flavors are 63 pesos
+            price: 63, 
             image: "../images/spicy.png"
         },
         {
@@ -726,10 +714,9 @@
         },
     ];
 
-    // Shopping cart array
+  
     let cart = JSON.parse(localStorage.getItem('skinolicious_cart')) || [];
 
-    // Function to format price
     function formatPrice(price) {
         return `₱${price.toFixed(2)}`;
     }
@@ -745,7 +732,7 @@
         const cartItemsCount = document.getElementById('cartItemsCount');
         const cartTotal = document.getElementById('cartTotal');
         
-        // Calculate total items and price
+   
         let totalItems = 0;
         let subtotal = 0;
         
@@ -754,13 +741,12 @@
             subtotal += item.price * item.quantity;
         });
         
-        // Update cart count
+    
         cartCount.textContent = totalItems;
-        
-        // Save cart to localStorage
+     
         localStorage.setItem('skinolicious_cart', JSON.stringify(cart));
         
-        // Update cart modal
+   
         if (cart.length === 0) {
             emptyCart.style.display = 'block';
             cartSummary.style.display = 'none';
@@ -770,7 +756,6 @@
             cartSummary.style.display = 'block';
             cartActions.style.display = 'flex';
             
-            // Update cart items list
             cartItems.innerHTML = '';
             cart.forEach((item, index) => {
                 const cartItem = document.createElement('div');
@@ -792,8 +777,7 @@
                 `;
                 cartItems.appendChild(cartItem);
             });
-            
-            // Add event listeners for quantity buttons
+
             document.querySelectorAll('.quantity-btn.decrease').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const index = parseInt(this.getAttribute('data-index'));
@@ -815,7 +799,7 @@
                 });
             });
             
-            // Add event listeners for remove buttons
+
             document.querySelectorAll('.remove-item').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const index = parseInt(this.getAttribute('data-index'));
@@ -831,18 +815,18 @@
         }
     }
 
-    // Function to add item to cart
+
     function addToCart(productId, quantity = 1) {
         const product = products.find(p => p.id === productId);
         
-        // Check if product already in cart
+
         const existingIndex = cart.findIndex(item => item.id === productId);
         
         if (existingIndex >= 0) {
-            // Update quantity if already in cart
+
             cart[existingIndex].quantity += quantity;
         } else {
-            // Add new item to cart
+
             cart.push({
                 id: product.id,
                 name: product.name,
@@ -855,7 +839,6 @@
         // Update cart display
         updateCartDisplay();
         
-        // Simple button animation
         const button = event.currentTarget;
         button.style.transform = 'scale(0.95)';
         setTimeout(() => {
@@ -863,7 +846,7 @@
         }, 200);
     }
 
-    // Function to clear cart
+
     function clearCart() {
         if (cart.length > 0) {
             if (confirm('Are you sure you want to clear your cart?')) {
@@ -874,14 +857,13 @@
         }
     }
 
-    // Function to generate PDF receipt
     function generatePDFReceipt() {
         if (cart.length === 0) {
             alert('Your cart is empty!');
             return;
         }
 
-        // Calculate totals
+
         let subtotal = 0;
         let totalItems = 0;
         
@@ -890,7 +872,7 @@
             totalItems += item.quantity;
         });
 
-        // Create receipt HTML
+   
         const receiptHTML = `
             <div id="receipt" style="padding: 20px; font-family: Arial, sans-serif; max-width: 400px;">
                 <div style="text-align: center; margin-bottom: 20px;">
@@ -1059,4 +1041,5 @@
 </script>
 
 </body>
+
 </html>

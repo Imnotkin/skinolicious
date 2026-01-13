@@ -750,7 +750,6 @@
                 cartItems.appendChild(cartItem);
             });
             
-
             document.querySelectorAll('.quantity-btn.decrease').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const index = parseInt(this.getAttribute('data-index'));
@@ -772,7 +771,6 @@
                 });
             });
             
-
             document.querySelectorAll('.remove-item').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const index = parseInt(this.getAttribute('data-index'));
@@ -781,25 +779,20 @@
                 });
             });
             
-
             cartSubtotal.textContent = formatPrice(subtotal);
             cartItemsCount.textContent = totalItems;
             cartTotal.textContent = formatPrice(subtotal);
         }
     }
 
-
     function addToCart(productId, quantity = 1) {
         const product = products.find(p => p.id === productId);
         
-
         const existingIndex = cart.findIndex(item => item.id === productId);
         
         if (existingIndex >= 0) {
-
             cart[existingIndex].quantity += quantity;
         } else {
-
             cart.push({
                 id: product.id,
                 name: product.name,
@@ -809,13 +802,9 @@
             });
         }
 
-        updateCartDisplay();
-
-        const button = event.currentTarget;
-        button.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            button.style.transform = '';
-        }, 200);
+        localStorage.setItem('skinolicious_cart', JSON.stringify(cart));
+        
+        window.location.reload();
     }
 
     function clearCart() {
@@ -823,7 +812,7 @@
             if (confirm('Are you sure you want to clear your cart?')) {
                 cart = [];
                 localStorage.removeItem('skinolicious_cart');
-                updateCartDisplay();
+                window.location.reload();
             }
         }
     }
@@ -902,7 +891,6 @@
         tempDiv.style.left = '-9999px';
         document.body.appendChild(tempDiv);
 
-
         html2canvas(tempDiv.querySelector('#receipt')).then(canvas => {
             const imgData = canvas.toDataURL('image/png');
             const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
@@ -929,7 +917,6 @@
             alert('Receipt generated successfully! Check your downloads folder.');
         });
     }
-
 
     function renderProducts() {
         const productGrid = document.getElementById('productGrid');
@@ -961,12 +948,9 @@
         });
     }
 
-
     document.addEventListener('DOMContentLoaded', () => {
-
         renderProducts();
         
- 
         document.getElementById('cartButton').addEventListener('click', () => {
             document.getElementById('cartModal').style.display = 'flex';
         });
@@ -983,10 +967,8 @@
 
         document.getElementById('clearCart').addEventListener('click', clearCart);
         
-   
         document.getElementById('generatePdf').addEventListener('click', generatePDFReceipt);
         
-
         const logo = document.querySelector('.logo');
         logo.addEventListener('mouseenter', function() {
             this.style.transform = 'scale(1.05)';

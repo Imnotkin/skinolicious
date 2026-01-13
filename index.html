@@ -19,7 +19,7 @@
             overflow-x: hidden;
         }
 
-        .header {
+        .a {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -29,7 +29,7 @@
             background: transparent;
         }
 
-        .logo {
+        .b {
             font-size: 32px;
             font-weight: 900;
             text-decoration: none;
@@ -37,24 +37,24 @@
             transition: transform 0.3s ease;
         }
 
-        .logo:hover {
+        .b:hover {
             transform: scale(1.05);
         }
 
-        .logo-text {
+        .c {
             font-size: 32px;
             font-weight: 900;
         }
 
-        .skin {
+        .d {
             color: #ff4d4d;
         }
 
-        .olicious {
+        .e {
             color: #ffa500;
         }
 
-        .nav a {
+        .f a {
             margin-left: 30px;
             color: white;
             text-decoration: none;
@@ -66,17 +66,17 @@
             padding: 5px 0;
         }
 
-        .nav a:hover {
+        .f a:hover {
             opacity: 1;
             color: #6ee7b7;
         }
 
-        .nav a.active {
+        .f a.g {
             color: #6ee7b7;
             opacity: 1;
         }
 
-        .nav a.active::after {
+        .f a.g::after {
             content: '';
             position: absolute;
             width: 100%;
@@ -86,7 +86,7 @@
             background: #6ee7b7;
         }
 
-        .nav a::after {
+        .f a::after {
             content: '';
             position: absolute;
             width: 0;
@@ -97,11 +97,11 @@
             transition: width 0.3s ease;
         }
 
-        .nav a:hover::after {
+        .f a:hover::after {
             width: 100%;
         }
 
-        .hero {
+        .h {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -112,16 +112,16 @@
             position: relative;
         }
 
-        .hero-text {
+        .i {
             max-width: 600px;
             position: relative;
             z-index: 10;
             text-shadow: 0 2px 10px rgba(0,0,0,0.2);
             margin-left: 60px;
-            animation: fadeInUp 1s ease-out;
+            animation: j 1s ease-out;
         }
 
-        @keyframes fadeInUp {
+        @keyframes j {
             from {
                 opacity: 0;
                 transform: translateY(30px);
@@ -132,7 +132,7 @@
             }
         }
 
-        .tagline {
+        .k {
             font-size: 16px;
             font-weight: bold;
             letter-spacing: 3px;
@@ -146,7 +146,7 @@
             border: 1px solid rgba(110, 231, 183, 0.3);
         }
 
-        .hero-text h1 {
+        .i h1 {
             font-size: 72px;
             line-height: 1.1;
             margin-bottom: 25px;
@@ -154,7 +154,7 @@
             color: white;
         }
 
-        .desc {
+        .l {
             font-size: 20px;
             line-height: 1.7;
             margin-bottom: 40px;
@@ -162,7 +162,7 @@
             max-width: 500px;
         }
 
-        .btn {
+        .m {
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -179,13 +179,13 @@
             cursor: pointer;
         }
 
-        .btn:hover {
+        .m:hover {
             transform: translateY(-5px) scale(1.05);
             box-shadow: 0 15px 40px rgba(34, 197, 94, 0.5);
             background: linear-gradient(90deg, #16a34a, #15803d);
         }
 
-        .hero-image-container {
+        .n {
             position: relative;
             z-index: 5;
             flex-shrink: 0;
@@ -194,127 +194,127 @@
             justify-content: flex-end;
             align-items: center;
             padding-right: 40px;
-            animation: fadeIn 1.5s ease-out;
+            animation: o 1.5s ease-out;
         }
 
-        @keyframes fadeIn {
+        @keyframes o {
             from { opacity: 0; }
             to { opacity: 1; }
         }
 
-        .pouch-single {
+        .p {
             width: 600px;
             height: auto;
             max-width: 100%;
             opacity: 0.95;
             filter: drop-shadow(0 40px 60px rgba(0,0,0,0.5));
-            animation: floatAndRotate 8s ease-in-out infinite;
+            animation: q 8s ease-in-out infinite;
             transition: transform 0.5s ease;
         }
 
-        .pouch-single:hover {
+        .p:hover {
             transform: scale(1.05) rotate(5deg);
         }
 
-        @keyframes floatAndRotate {
+        @keyframes q {
             0% { transform: translateY(0px) rotate(5deg); }
             50% { transform: translateY(-30px) rotate(8deg); }
             100% { transform: translateY(0px) rotate(5deg); }
         }
 
         @media (max-width: 1200px) {
-            .hero-text h1 {
+            .i h1 {
                 font-size: 60px;
             }
             
-            .pouch-single {
+            .p {
                 width: 500px;
             }
         }
 
         @media (max-width: 1100px) {
-            .hero {
+            .h {
                 flex-direction: column;
                 text-align: center;
                 padding-top: 60px;
             }
             
-            .hero-text {
+            .i {
                 margin-left: 0;
                 margin-bottom: 60px;
                 max-width: 800px;
             }
             
-            .desc {
+            .l {
                 margin: 0 auto 40px auto;
             }
             
-            .hero-image-container {
+            .n {
                 width: 100%;
                 justify-content: center;
                 padding-right: 0;
             }
             
-            .pouch-single {
+            .p {
                 width: 450px;
             }
         }
 
         @media (max-width: 768px) {
-            .header {
+            .a {
                 padding: 20px 30px;
                 flex-direction: column;
                 gap: 20px;
             }
             
-            .nav {
+            .f {
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
                 gap: 15px;
             }
             
-            .nav a {
+            .f a {
                 margin-left: 0;
             }
             
-            .hero-text h1 {
+            .i h1 {
                 font-size: 48px;
             }
             
-            .tagline {
+            .k {
                 font-size: 14px;
                 letter-spacing: 2px;
             }
             
-            .logo-text {
+            .c {
                 font-size: 28px;
             }
             
-            .pouch-single {
+            .p {
                 width: 350px;
             }
         }
 
         @media (max-width: 480px) {
-            .hero-text h1 {
+            .i h1 {
                 font-size: 36px;
             }
             
-            .desc {
+            .l {
                 font-size: 18px;
             }
             
-            .btn {
+            .m {
                 padding: 18px 40px;
                 font-size: 16px;
             }
             
-            .logo-text {
+            .c {
                 font-size: 24px;
             }
             
-            .pouch-single {
+            .p {
                 width: 280px;
             }
         }
@@ -322,51 +322,51 @@
 </head>
 <body>
 
-<header class="header">
-    <a href="index.html" class="logo">
-        <span class="logo-text">
-            <span class="skin">Skin</span><span class="olicious">OLicious</span>
+<header class="a">
+    <a href="index.html" class="b">
+        <span class="c">
+            <span class="d">Skin</span><span class="e">OLicious</span>
         </span>
     </a>
     
-    <nav class="nav">
-        <a href="index.html" class="active">Home</a>
+    <nav class="f">
+        <a href="index.html" class="g">Home</a>
         <a href="pages/products.html">Products</a>
         <a href="pages/contact.html">Contact</a>
     </nav>
 </header>
 
-<section class="hero">
-    <div class="hero-text">
+<section class="h">
+    <div class="i">
         <h1>Premium Chicken Snacks</h1>
-        <p class="desc">High-quality snacks made with real ingredients for authentic flavor that satisfies every craving.</p>
-        <a href="pages/products.html" class="btn">
+        <p class="l">High-quality snacks made with real ingredients for authentic flavor that satisfies every craving.</p>
+        <a href="pages/products.html" class="m">
             Shop Now
         </a>
     </div>
 
-    <div class="hero-image-container">
-        <img src="images/chick.png" alt="Premium Chicken Snacks" class="pouch-single">
+    <div class="n">
+        <img src="images/chick.png" alt="Premium Chicken Snacks" class="p">
     </div>
 </section>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const shopButton = document.querySelector('.btn');
-        shopButton.addEventListener('click', function(e) {
+        const 1 = document.querySelector('.m');
+        1.addEventListener('click', function(e) {
             this.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 this.style.transform = '';
             }, 200);
         });
         
-        const logo = document.querySelector('.logo');
-        logo.addEventListener('mouseenter', function() {
+        const 2 = document.querySelector('.b');
+        2.addEventListener('mouseenter', function() {
             this.style.transform = 'scale(1.05)';
             this.style.transition = 'transform 0.3s ease';
         });
         
-        logo.addEventListener('mouseleave', function() {
+        2.addEventListener('mouseleave', function() {
             this.style.transform = 'scale(1)';
         });
     });

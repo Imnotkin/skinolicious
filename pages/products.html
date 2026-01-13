@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>SkinOLicious - Our Products</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
@@ -21,7 +20,6 @@
             min-height: 100vh;
             overflow-x: hidden;
         }
-
         .header {
             display: flex;
             justify-content: space-between;
@@ -103,7 +101,6 @@
         .nav a:hover::after {
             width: 100%;
         }
-
         .products-hero {
             padding: 60px 8% 40px;
             text-align: center;
@@ -138,7 +135,6 @@
             margin: 0 auto 40px;
             line-height: 1.6;
         }
-
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -221,7 +217,6 @@
             background: #1ea34f;
             transform: scale(1.05);
         }
-
         .cart-button {
             position: fixed;
             bottom: 30px;
@@ -260,7 +255,6 @@
             font-weight: bold;
             margin-left: 5px;
         }
-
         .cart-modal {
             position: fixed;
             top: 0;
@@ -484,7 +478,6 @@
             margin-bottom: 20px;
             color: #ddd;
         }
-
         @media (max-width: 1200px) {
             .products-hero h1 {
                 font-size: 60px;
@@ -591,7 +584,6 @@
     <nav class="nav">
         <a href="../index.html">Home</a>
         <a href="products.html" class="active">Products</a>
-        <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
     </nav>
 </header>
@@ -603,10 +595,8 @@
     </section>
 
     <section class="product-grid" id="productGrid">
-        
     </section>
 </main>
-
 <button class="cart-button" id="cartButton">
     <i class="fas fa-shopping-cart"></i> View Cart
     <span class="cart-count" id="cartCount">0</span>
@@ -716,7 +706,7 @@
         const cartSubtotal = document.getElementById('cartSubtotal');
         const cartItemsCount = document.getElementById('cartItemsCount');
         const cartTotal = document.getElementById('cartTotal');
-        
+
         let totalItems = 0;
         let subtotal = 0;
         
@@ -724,7 +714,7 @@
             totalItems += item.quantity;
             subtotal += item.price * item.quantity;
         });
-        
+
         cartCount.textContent = totalItems;
         
         localStorage.setItem('skinolicious_cart', JSON.stringify(cart));
@@ -737,7 +727,7 @@
             emptyCart.style.display = 'none';
             cartSummary.style.display = 'block';
             cartActions.style.display = 'flex';
-            
+
             cartItems.innerHTML = '';
             cart.forEach((item, index) => {
                 const cartItem = document.createElement('div');
@@ -760,6 +750,7 @@
                 cartItems.appendChild(cartItem);
             });
             
+
             document.querySelectorAll('.quantity-btn.decrease').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const index = parseInt(this.getAttribute('data-index'));
@@ -781,6 +772,7 @@
                 });
             });
             
+
             document.querySelectorAll('.remove-item').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const index = parseInt(this.getAttribute('data-index'));
@@ -789,20 +781,25 @@
                 });
             });
             
+
             cartSubtotal.textContent = formatPrice(subtotal);
             cartItemsCount.textContent = totalItems;
             cartTotal.textContent = formatPrice(subtotal);
         }
     }
 
+
     function addToCart(productId, quantity = 1) {
         const product = products.find(p => p.id === productId);
         
+
         const existingIndex = cart.findIndex(item => item.id === productId);
         
         if (existingIndex >= 0) {
+
             cart[existingIndex].quantity += quantity;
         } else {
+
             cart.push({
                 id: product.id,
                 name: product.name,
@@ -811,9 +808,9 @@
                 category: product.category
             });
         }
-        
+
         updateCartDisplay();
-        
+
         const button = event.currentTarget;
         button.style.transform = 'scale(0.95)';
         setTimeout(() => {
@@ -905,6 +902,7 @@
         tempDiv.style.left = '-9999px';
         document.body.appendChild(tempDiv);
 
+
         html2canvas(tempDiv.querySelector('#receipt')).then(canvas => {
             const imgData = canvas.toDataURL('image/png');
             const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
@@ -925,12 +923,13 @@
             }
 
             pdf.save(`SkinOLicious_Receipt_${Date.now()}.pdf`);
-            
+ 
             document.body.removeChild(tempDiv);
-            
+ 
             alert('Receipt generated successfully! Check your downloads folder.');
         });
     }
+
 
     function renderProducts() {
         const productGrid = document.getElementById('productGrid');
@@ -962,27 +961,32 @@
         });
     }
 
+
     document.addEventListener('DOMContentLoaded', () => {
+
         renderProducts();
         
+ 
         document.getElementById('cartButton').addEventListener('click', () => {
             document.getElementById('cartModal').style.display = 'flex';
         });
-        
+
         document.getElementById('closeCart').addEventListener('click', () => {
             document.getElementById('cartModal').style.display = 'none';
         });
-        
+
         document.getElementById('cartModal').addEventListener('click', (e) => {
             if (e.target.id === 'cartModal') {
                 document.getElementById('cartModal').style.display = 'none';
             }
         });
-        
+
         document.getElementById('clearCart').addEventListener('click', clearCart);
         
+   
         document.getElementById('generatePdf').addEventListener('click', generatePDFReceipt);
         
+
         const logo = document.querySelector('.logo');
         logo.addEventListener('mouseenter', function() {
             this.style.transform = 'scale(1.05)';
